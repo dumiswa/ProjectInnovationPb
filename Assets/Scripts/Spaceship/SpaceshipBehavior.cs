@@ -11,8 +11,10 @@ public class SpaceshipBehavior : MonoBehaviour
     private Rigidbody rb;
     public bool isBoosting;
 
+    public SpaceshipController gyroInput;
 
-    void Start()
+
+    void Start()    
     {
         rb = GetComponent<Rigidbody>();
     }

@@ -23,12 +23,12 @@ public class SpaceshipController : MonoBehaviour
         Quaternion relativeAttitude = Quaternion.Inverse(initialAttitude) * gyro;
         Vector3 gyroEularAngles = gyro.eulerAngles;
 
-
         float zRotation = gyro.eulerAngles.z;
+        float yRotation = gyro.eulerAngles.y * rotationSpeedMultiplier;
         float xTilt = gyro.eulerAngles.x;
 
-        transform.eulerAngles = new Vector3(0, gyro.y, zRotation);
-        //transform.position = new Vector3(transform.position.x, xTilt, transform.position.z);
+        transform.eulerAngles = new Vector3(yRotation, 0, zRotation);
+        //transform.rotation = Quaternion.Euler(0, transform.rotation.y - zRotation, zRotation);
 
         /* if (!isCalibrated) return;
 
@@ -48,8 +48,8 @@ public class SpaceshipController : MonoBehaviour
          // Apply rotation and adjusted Y position
          transform.eulerAngles = new Vector3(0, 0, zRotation);
          transform.position = new Vector3(transform.position.x, yPos, transform.position.z);*/
-
     }
+
 
     void CalibrateGyro()
     {
