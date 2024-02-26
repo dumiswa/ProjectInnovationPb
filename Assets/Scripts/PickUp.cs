@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    private bool hasAnItem;
-    private bool canPickUp;
+    private bool canUseAbility;
 
     public GameObject ownedItemInstance;
     public GameObject ownedItemPrefab;
+    
+
     private void Start()
     {
-        hasAnItem = false;
-        canPickUp = true;
+        canUseAbility = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BlackHoles") && ownedItemInstance == null)
         {
-            canPickUp = false;
+            canUseAbility = true;
 
             ownedItemPrefab = other.gameObject;
 
@@ -28,11 +28,13 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    private void update()
+    void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canPickUp! && ownedItemPrefab != null) 
+        if (Input.GetMouseButtonDown(0) && canUseAbility && ownedItemPrefab)
         {
             ownedItemInstance = Instantiate(ownedItemPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Ability used!");
+            canUseAbility = false;
         }
     }
 
