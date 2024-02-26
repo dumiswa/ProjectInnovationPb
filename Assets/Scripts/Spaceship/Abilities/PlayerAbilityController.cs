@@ -15,6 +15,7 @@ public class PlayerAbilityController : MonoBehaviour
             {
                 currentAbility = abilityComponent;
                 other.gameObject.SetActive(false);
+                Debug.Log("Ability picked up: " + abilityComponent.GetType().ToString());
             }
         }
     }
@@ -27,4 +28,19 @@ public class PlayerAbilityController : MonoBehaviour
             currentAbility = null;
         }
     }
+
+    private bool isProtected = false;
+
+    public void SetProtection(bool state)
+    {
+        isProtected = state;
+        Debug.Log($"Player protection set to: {isProtected}");
+    }
+
+    public bool IsProtected()
+    {
+        return isProtected;
+    }
 }
+
+
