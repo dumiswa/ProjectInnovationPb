@@ -16,14 +16,6 @@ public class PickUp : MonoBehaviour
         canPickUp = true;
     }
 
-    private void Update()
-    {
-_       if (canPickUp && hasAnItem!) 
-        {
-            
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BlackHoles") && ownedItemInstance == null)
