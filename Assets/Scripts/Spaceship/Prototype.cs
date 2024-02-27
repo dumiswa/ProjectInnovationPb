@@ -75,6 +75,23 @@ public class Prototype : MonoBehaviour
     }
 
     // Handle spaceship rotation
+
+    public void ActivateSpeedBoost(float boostAmount, float duration)
+    {
+        StartCoroutine(SpeedBoostCoroutine(boostAmount, duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float boostAmount, float duration)
+    {
+        float originalSpeed = speed; // Save the original speed
+        speed += boostAmount; // Increase the speed
+
+        yield return new WaitForSeconds(duration); // Wait for the duration of the boost
+
+        speed = originalSpeed; // Reset the speed to original
+    }
+
+
     void HandleRotation()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
