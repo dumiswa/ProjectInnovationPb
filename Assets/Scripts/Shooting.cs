@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public static class GameState
+{
+    public static bool canShoot { get; set; }
+}
+
 public class Shooting : MonoBehaviour
 {
     public GameObject BulletPrefab;
