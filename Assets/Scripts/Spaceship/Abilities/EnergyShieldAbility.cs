@@ -11,6 +11,6 @@ public class EnergyShieldAbility : MonoBehaviour, IAbility
     {
         GameObject shield = Instantiate(energyShieldPrefab, User.transform.position, Quaternion.identity);
         shield.transform.SetParent(User.transform);
-        shield.transform.localScale = new Vector3((float)1.4, (float)5.6, (float)2.2);
+        shield.transform.localScale = new Vector3((float)9, (float)9, (float)9);
     }
 }
