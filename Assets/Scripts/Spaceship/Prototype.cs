@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Prototype : MonoBehaviour
 {
+    public bool useController = false;
+
     public float speed = 100.0f;
     public float maxSpeed = 500.0f;
     public float mouseSensitivity = 100f;
@@ -53,7 +55,7 @@ public class Prototype : MonoBehaviour
     // Handle spaceship movements and actions
     void HandleMovement()
     {
-        if (server.connected)
+        if (useController ? server.connected : Input.GetKey(KeyCode.W))
         {
             spaceshipRigidbody.AddForce(transform.forward * speed);
             //StartFlameEffects();
@@ -63,12 +65,12 @@ public class Prototype : MonoBehaviour
             //StopFlameEffects();
         }
 
-        if (server.brake)
+        if (useController ? server.brake : Input.GetKey(KeyCode.S))
         {
             spaceshipRigidbody.velocity = Vector3.Lerp(spaceshipRigidbody.velocity, Vector3.zero, brakeSpeed);
             ChangeFOV(normalFOV);
         }
-        else
+        else if (useController ? true : Input.GetKeyUp(KeyCode.S))
         {
             ChangeFOV(maxFOV);
         }
@@ -99,15 +101,23 @@ public class Prototype : MonoBehaviour
 
     void HandleRotation()
     {
-        float mouseX = server.rotation;  //Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = server.elevation * 45;// Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = useController ? server.rotation : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = useController ? server.elevation * 45 :  Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // smooth between current rotation and wanted rotation
-        
-        
-        xRotation = Mathf.SmoothStep(xRotation, -mouseY, .05f);
-        wantedYRotation += mouseX;
-        yRotation = Mathf.SmoothStep(transform.localRotation.y, wantedYRotation, 0.5f);
+
+        if (useController)
+        {
+            xRotation = Mathf.SmoothStep(xRotation, -mouseY, .05f);
+            wantedYRotation += mouseX;
+            yRotation = Mathf.SmoothStep(transform.localRotation.y, wantedYRotation, 0.5f);
+        }
+        else
+        {
+            xRotation -= mouseY;
+            yRotation += mouseX;
+        }
+
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);  // To prevent flipping
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
