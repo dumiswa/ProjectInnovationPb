@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class Prototype : MonoBehaviour
     public float maxFOV = 90f;
     public float fovLerpTime = 2f;
 
+    public SERVER server;
+
     public List<ParticleSystem> flameParticles;
     //public AudioSource flameAudioSource;
 
@@ -25,12 +28,14 @@ public class Prototype : MonoBehaviour
     private Rigidbody spaceshipRigidbody;
     private float xRotation = 0f;
     private float yRotation = 0f;
+    private float wantedYRotation = 0f;
     private Coroutine fovCoroutine;
 
     void Start()
     {
         spaceshipRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        wantedYRotation = transform.localRotation.y;
     }
 
     void Update()
@@ -48,7 +53,7 @@ public class Prototype : MonoBehaviour
     // Handle spaceship movements and actions
     void HandleMovement()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (server.connected)
         {
             spaceshipRigidbody.AddForce(transform.forward * speed);
             //StartFlameEffects();
@@ -58,12 +63,12 @@ public class Prototype : MonoBehaviour
             //StopFlameEffects();
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (server.brake)
         {
             spaceshipRigidbody.velocity = Vector3.Lerp(spaceshipRigidbody.velocity, Vector3.zero, brakeSpeed);
             ChangeFOV(normalFOV);
         }
-        else if (Input.GetKeyUp(KeyCode.S))
+        else
         {
             ChangeFOV(maxFOV);
         }
@@ -94,11 +99,15 @@ public class Prototype : MonoBehaviour
 
     void HandleRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = server.rotation;  //Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = server.elevation * 45;// Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        yRotation += mouseX;
+        // smooth between current rotation and wanted rotation
+        
+        
+        xRotation = Mathf.SmoothStep(xRotation, -mouseY, .05f);
+        wantedYRotation += mouseX;
+        yRotation = Mathf.SmoothStep(transform.localRotation.y, wantedYRotation, 0.5f);
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);  // To prevent flipping
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
