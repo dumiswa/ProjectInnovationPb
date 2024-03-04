@@ -14,8 +14,8 @@ public class SERVER : MonoBehaviour
     private int port = 49154;
     private int broadCastPort = 49153;
 
-    private List<TcpClient> connectedClients = new List<TcpClient>();
-    private const int maxClients = 1; // Maximum allowed clients
+    public List<TcpClient> connectedClients = new List<TcpClient>();
+    private const int maxClients = 4; // Maximum allowed clients
 
     public bool brake;
     public float elevation;
@@ -23,10 +23,21 @@ public class SERVER : MonoBehaviour
     public bool connected = false;
     
     [SerializeField] private TextMeshProUGUI connectionsText;
-
+    
+    public static SERVER instance;
+    
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("2 INPUTMANAGERS IN SCENE, DELETE AT LEAST ONE OF THEM");
+        }
+        
         connectionsText.text = $"Connected controllers: {connectedClients.Count}";
         for (int i = port; i <= 65535; i++)
         {
@@ -50,7 +61,7 @@ public class SERVER : MonoBehaviour
         Debug.Log($"Port {port} chosen");
         StartServer();
     }
-    
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
@@ -58,6 +69,8 @@ public class SERVER : MonoBehaviour
             DisconnectAll();
         }
     }
+
+    #region Networking
     
     async void BroadcastServer()
     {
@@ -92,6 +105,7 @@ public class SERVER : MonoBehaviour
             {
                 connected = true;
                 connectedClients.Add(client);
+                GameManager.instance.AddNewPlayer(connectedClients.Count);
                 connectionsText.text = $"Connected controllers: {connectedClients.Count}";
                 
                 HandleClient(client);
@@ -128,9 +142,7 @@ public class SERVER : MonoBehaviour
                 {
                     message = message.Split(':')[1];
                     string[] data = message.Split(',');
-                    brake = int.Parse(data[0]) == 1;
-                    elevation = float.Parse(data[1]);
-                    rotation = float.Parse(data[2]);
+                    InputManager.instance.SetInput(controllerIndex, float.Parse(data[1]), float.Parse(data[2]), int.Parse(data[0]) == 1);
                 }
                 
                 if (message == "DisconnectClient")
@@ -166,6 +178,8 @@ public class SERVER : MonoBehaviour
         connectionsText.text = $"Connected controllers: {connectedClients.Count}";
     }
 
+    #endregion
+    
     private void OnDestroy()
     {
         DisconnectAll();

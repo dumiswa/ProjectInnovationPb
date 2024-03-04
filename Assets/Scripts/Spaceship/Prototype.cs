@@ -8,6 +8,8 @@ public class Prototype : MonoBehaviour
 {
     public bool useController = false;
 
+    private int playerIndex;
+
     public float speed = 100.0f;
     public float maxSpeed = 500.0f;
     public float mouseSensitivity = 100f;
@@ -38,10 +40,13 @@ public class Prototype : MonoBehaviour
         spaceshipRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         wantedYRotation = transform.localRotation.y;
+        server = SERVER.instance;
     }
 
     void Update()
     {
+        if (playerIndex == 0)
+            return;
         HandleMovement();
         HandleRotation();
         LimitSpeed();
@@ -50,6 +55,11 @@ public class Prototype : MonoBehaviour
         {
             //PlayShootingSound();
         }
+    }
+
+    public void Init(int playerIndex)
+    {
+        this.playerIndex = playerIndex;
     }
 
     // Handle spaceship movements and actions
@@ -65,7 +75,7 @@ public class Prototype : MonoBehaviour
             //StopFlameEffects();
         }
 
-        if (useController ? server.brake : Input.GetKey(KeyCode.S))
+        if (useController ? InputManager.instance.GetInput(playerIndex).Brake : Input.GetKey(KeyCode.S))
         {
             spaceshipRigidbody.velocity = Vector3.Lerp(spaceshipRigidbody.velocity, Vector3.zero, brakeSpeed);
             ChangeFOV(normalFOV);
@@ -101,8 +111,8 @@ public class Prototype : MonoBehaviour
 
     void HandleRotation()
     {
-        float mouseX = useController ? server.rotation : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = useController ? server.elevation * 45 :  Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = useController ? InputManager.instance.GetInput(playerIndex).Rotation : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = useController ? InputManager.instance.GetInput(playerIndex).Elevation * 45 :  Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // smooth between current rotation and wanted rotation
 
@@ -110,7 +120,7 @@ public class Prototype : MonoBehaviour
         {
             xRotation = Mathf.SmoothStep(xRotation, -mouseY, .05f);
             wantedYRotation += mouseX;
-            yRotation = Mathf.SmoothStep(transform.localRotation.y, wantedYRotation, 0.5f);
+            yRotation = Mathf.SmoothStep(transform.localRotation.y, wantedYRotation, 0.7f);
         }
         else
         {
