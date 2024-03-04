@@ -1,7 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    private class PlayerInfo
+    {
+        public GameObject playerObject;
+        public int currentLap = 0;
+        public int currentCheckpointIndex = 0;
+    }
+
+    private List<PlayerInfo> players = new List<PlayerInfo>();
+
     public static CheckPoint Instance { get; private set; }
 
     [Header("Checkpoints")]
@@ -15,6 +25,13 @@ public class CheckPoint : MonoBehaviour
     private int currentCheckpointIndex = 0;
 
     private bool raceStarted = false;
+
+    public void RegisterPlayers(GameObject playerObject)
+    {
+        PlayerInfo newPlayer = new PlayerInfo();
+        newPlayer.playerObject = playerObject;
+        players.Add(newPlayer);
+    }
 
     private void Update()
     {
@@ -55,14 +72,14 @@ public class CheckPoint : MonoBehaviour
             }
             else if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
             {
-                AdvanceCheckpoint();
+                CheckpointPassed(currentCheckpointIndex);
             }
         }
     }
 
     public void CheckpointPassed(int index)
     {
-        if (!raceStarted && index == 0)
+        /*if (!raceStarted && index == 0)
         {
             StartRace();
             return; 
@@ -79,7 +96,36 @@ public class CheckPoint : MonoBehaviour
             {
                 CompleteLap();
             }
+        }*/
+
+        foreach (PlayerInfo player in players)
+        {
+            if (raceStarted)
+            {
+                if (index == player.currentCheckpointIndex)
+                {
+                    player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
+
+                    if (index == 0)
+                    {
+                        player.currentLap++;
+                    }
+                }
+            }
         }
+        CalculatePlayerPosition();
+    }
+
+    private void CalculatePlayerPosition()
+    {
+        players.Sort((p1, p2) =>
+        {
+            if (p1.currentLap != p2.currentLap)
+                return p2.currentLap.CompareTo(p1.currentLap);
+
+            else
+                return p2.currentCheckpointIndex.CompareTo(p1.currentCheckpointIndex);
+        });
     }
 
     private void StartRace()
