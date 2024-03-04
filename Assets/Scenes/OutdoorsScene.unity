@@ -2550,6 +2550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ffaaf0c659704ba4dd92a949eb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useController: 0
   speed: 100
   maxSpeed: 500
   mouseSensitivity: 100
@@ -2559,6 +2560,7 @@ MonoBehaviour:
   normalFOV: 80
   maxFOV: 100
   fovLerpTime: 2
+  server: {fileID: 0}
   flameParticles: []
 --- !u!114 &811394963
 MonoBehaviour:
@@ -3412,7 +3414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 3336073263184083824}
-  end: {fileID: 0}
+  end: {fileID: 1654740999}
   checkPointArray:
   - {fileID: 3336073263184083824}
   - {fileID: 1353980945}
@@ -6752,6 +6754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ffaaf0c659704ba4dd92a949eb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useController: 0
   speed: 100
   maxSpeed: 300
   mouseSensitivity: 100
@@ -6761,6 +6764,7 @@ MonoBehaviour:
   normalFOV: 80
   maxFOV: 100
   fovLerpTime: 2
+  server: {fileID: 0}
   flameParticles: []
 --- !u!65 &1835892722131642987
 BoxCollider:
@@ -14766,6 +14770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ffaaf0c659704ba4dd92a949eb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useController: 0
   speed: 100
   maxSpeed: 500
   mouseSensitivity: 100
@@ -14775,6 +14780,7 @@ MonoBehaviour:
   normalFOV: 80
   maxFOV: 100
   fovLerpTime: 2
+  server: {fileID: 0}
   flameParticles: []
 --- !u!54 &7856866677553596578
 Rigidbody:
