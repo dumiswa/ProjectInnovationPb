@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -16,6 +17,11 @@ public class SERVER : MonoBehaviour
     private List<TcpClient> connectedClients = new List<TcpClient>();
     private const int maxClients = 1; // Maximum allowed clients
 
+    public bool brake;
+    public float elevation;
+    public float rotation;
+    public bool connected = false;
+    
     [SerializeField] private TextMeshProUGUI connectionsText;
 
     // Start is called before the first frame update
@@ -84,6 +90,7 @@ public class SERVER : MonoBehaviour
             TcpClient client = await server.AcceptTcpClientAsync();
             if (connectedClients.Count < maxClients)
             {
+                connected = true;
                 connectedClients.Add(client);
                 connectionsText.text = $"Connected controllers: {connectedClients.Count}";
                 
@@ -99,6 +106,8 @@ public class SERVER : MonoBehaviour
         }
     }
 
+    private string message;
+    
     private async void HandleClient(TcpClient client)
     {
         try
@@ -112,9 +121,18 @@ public class SERVER : MonoBehaviour
 
             while (client.Connected && (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
             {
-                string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                Debug.Log($"Received from client {controllerIndex}: {message}");
-
+                message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                //Debug.Log($"Received from client {controllerIndex}: {message}");
+                
+                if (message.Contains("ControlData:"))
+                {
+                    message = message.Split(':')[1];
+                    string[] data = message.Split(',');
+                    brake = int.Parse(data[0]) == 1;
+                    elevation = float.Parse(data[1]);
+                    rotation = float.Parse(data[2]);
+                }
+                
                 if (message == "DisconnectClient")
                 {
                     client.Close();
@@ -128,7 +146,7 @@ public class SERVER : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError($"Error handling client: {e.Message}");
+            Debug.LogError($"Error handling client: {e.Message}, message: {message}");
         }
         finally
         {
@@ -149,6 +167,11 @@ public class SERVER : MonoBehaviour
     }
 
     private void OnDestroy()
+    {
+        DisconnectAll();
+    }
+
+    private void OnApplicationQuit()
     {
         DisconnectAll();
     }
