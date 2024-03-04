@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 00436eea52c49d042b9e76da08a5887c
   - enabled: 1
+    path: Assets/Scenes/ShipSelector.unity
+    guid: 67be26bca4b71b340b44334f94fa3de3
+  - enabled: 1
     path: Assets/Scenes/OutdoorsScene.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   m_configObjects: {}

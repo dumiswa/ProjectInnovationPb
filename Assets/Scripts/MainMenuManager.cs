@@ -71,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void singlePlayerOnClick()
     {
-        SceneManager.LoadScene("OutdoorsScene");
+        SceneManager.LoadScene("ShipSelector");
     }
 
     /*public void ChangeMenu(MenuState newState)
