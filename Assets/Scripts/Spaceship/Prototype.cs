@@ -45,7 +45,7 @@ public class Prototype : MonoBehaviour
 
     void Update()
     {
-        if (playerIndex == 0)
+        if (playerIndex == 0 && useController)
             return;
         HandleMovement();
         HandleRotation();
