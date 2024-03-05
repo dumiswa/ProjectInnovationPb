@@ -31,20 +31,19 @@ Material:
   m_ValidKeywords:
   - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
-  - _DOUBLESIDED_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3032
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - TransparentDepthPrepass
+  - MOTIONVECTORS
   - TransparentDepthPostpass
   - TransparentBackface
-  - MOTIONVECTORS
+  - TransparentDepthPrepass
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -75,13 +74,13 @@ Material:
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _Distortion_amount: 0.46
-    - _Distortion_scale: 50
-    - _DoubleSidedEnable: 1
-    - _DoubleSidedGIMode: 0
+    - _Distortion_amount: 0.48
+    - _Distortion_scale: 39.16
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 2
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
@@ -89,7 +88,7 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
-    - _Rotation_amount: 1
+    - _Rotation_amount: -1.5
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1
@@ -104,10 +103,10 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: 0
+    - _TransparentSortPriority: 32
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _Twirl_strength: 20
+    - _Twirl_strength: 30
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestTransparent: 4
