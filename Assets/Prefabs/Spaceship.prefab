@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ffaaf0c659704ba4dd92a949eb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useController: 1
   speed: 100
   maxSpeed: 500
   mouseSensitivity: 100
@@ -138,6 +139,7 @@ MonoBehaviour:
   normalFOV: 80
   maxFOV: 100
   fovLerpTime: 2
+  server: {fileID: 0}
   flameParticles: []
 --- !u!114 &742209776964796383
 MonoBehaviour:
