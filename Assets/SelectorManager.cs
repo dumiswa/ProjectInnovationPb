@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SelectorManager : MonoBehaviour
 {
-    private List<SpaceshipSelector> selectors = new List<SpaceshipSelector>();
+    public List<SpaceshipSelector> selectors = new List<SpaceshipSelector>();
     public GameObject selectorPrefab;
     public static SelectorManager instance;
 
@@ -25,6 +25,8 @@ public class SelectorManager : MonoBehaviour
         {
             Debug.LogError("2 SELECTORMANAGERS IN SCENE, DELETE AT LEAST ONE OF THEM");
         }
+
+        PlayButton.interactable = false;
     }
 
     public void ChangeSelection(int playerIndex, int changeID)
