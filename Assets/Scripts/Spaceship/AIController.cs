@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class AIController : MonoBehaviour
 {
@@ -23,19 +24,37 @@ public class AIController : MonoBehaviour
     private Vector3 deviationVector;
     private Rigidbody rb;
 
+    public CheckPoint race;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+        race = FindObjectOfType<CheckPoint>();
+        if (race != null) 
+        {
+            race.RaceStartedEvent += OnRaceStarted;
+        }
+        else
+        {
+            Debug.Log("No checkpoint obj found");
+        }
     }
 
+    private void OnRaceStarted()
+    {
+        enabled = true;
+    }
 
     void Update()
     {
-        WaypointNavigation();
-        SteeringBehaviour();      
+       if (race.raceStarted)
+       {
+            WaypointNavigation();
+            SteeringBehaviour();
+       }
     }
-
 
     void WaypointNavigation()
     {
@@ -54,14 +73,14 @@ public class AIController : MonoBehaviour
             if (distanceToWaypoint < 1f)
             {
                 currentWaypointIndex++;
-                CalculateDeviationAngle();
+                //CalculateDeviationAngle();
             }
         }
     }
 
     void CalculateDeviationAngle()
     {
-        deviationVector = Random.insideUnitCircle * maxDeviationAngle;
+        deviationVector = UnityEngine.Random.insideUnitCircle * maxDeviationAngle;
         Debug.Log("Deviation Vector" + deviationVector);
     }
 

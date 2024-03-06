@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
     private class PlayerInfo
     {
-        public GameObject playerObject;
+        public string name;
         public int currentLap = 0;
         public int currentCheckpointIndex = 0;
     }
@@ -24,22 +26,15 @@ public class CheckPoint : MonoBehaviour
     private int currentLap = 0;
     private int currentCheckpointIndex = 0;
 
-    private bool raceStarted = false;
+    public bool raceStarted = false;
 
-    public void RegisterPlayers(GameObject playerObject)
-    {
-        PlayerInfo newPlayer = new PlayerInfo();
-        newPlayer.playerObject = playerObject;
-        players.Add(newPlayer);
-    }
+    [Header("Countdown")]
+    private bool countdownStarted = false;
+    private float countdownTimer;
+    private float countdownDuration = 3.0f;
+    public TMP_Text countdownText;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetRace();
-        }
-    }
+    public event Action RaceStartedEvent;
 
     void Awake()
     {
@@ -50,6 +45,51 @@ public class CheckPoint : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+        }
+
+        countdownText.gameObject.SetActive(false);
+
+        StartCountdown();
+    }
+
+    public void RegisterPlayers(string name)
+    {
+        PlayerInfo newPlayer = new PlayerInfo();
+        newPlayer.name = name;
+        players.Add(newPlayer);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetRace();
+        }
+
+        if (countdownStarted)
+            UpdateCountdown();
+    }
+
+    private void StartCountdown()
+    {
+        countdownText.gameObject.SetActive(true);
+        countdownStarted = true;
+        countdownTimer = countdownDuration;
+    }
+
+    private void UpdateCountdown()
+    {
+        countdownTimer -= Time.deltaTime;
+        int seconds = Mathf.CeilToInt(countdownTimer);
+
+        if (seconds > 0)
+        {
+            countdownText.text = seconds.ToString();
+        }
+        else if (seconds == 0)
+        {
+            countdownText.text = "GO!";
+            StartRace();
         }
     }
 
@@ -66,11 +106,11 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("collided");
-            if (!raceStarted && gameObject == start)
+            /*if (!raceStarted && gameObject == start)
             {
                 StartRace();
-            }
-            else if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
+            }*/
+            if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
             {
                 CheckpointPassed(currentCheckpointIndex);
             }
@@ -131,9 +171,14 @@ public class CheckPoint : MonoBehaviour
     private void StartRace()
     {
         raceStarted = true;
+        countdownStarted = false;
+        countdownText.gameObject.SetActive(false);
+
         currentLap = 1;
         currentCheckpointIndex = 1; 
         Debug.Log("Race has started!");
+
+        RaceStartedEvent?.Invoke();
     }
 
     private void AdvanceCheckpoint()
