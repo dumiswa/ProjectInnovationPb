@@ -70,7 +70,7 @@ public class SERVER : MonoBehaviour
         for (int i = 0; i < connectedClients.Count; i++)
         {
             GameManager.instance.AddNewPlayer(i + 1, shipIndices[i]);
-            CheckPoint.Instance.RegisterPlayers("");
+            CheckPoint.Instance.RegisterPlayers(SelectorManager.instance.selectors[i].name);
         }
     }
 
@@ -164,7 +164,18 @@ public class SERVER : MonoBehaviour
             while (client.Connected && (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
             {
                 message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                //Debug.Log($"Received from client {controllerIndex}: {message}");
+                if (message.Contains("DisconnectClient"))
+                {
+                    client.Close();
+                    connectedClients.Remove(client);
+                    //connectionsText.text = $"Connected controllers: {connectedClients.Count}";
+                }
+
+                if (message.Contains("Name:"))
+                {
+                    var shipName = message.Split(':')[1];
+                    SelectorManager.instance.selectors[controllerIndex - 1].SetName(shipName);
+                }
                 if (message.Contains("SelectShip:"))
                 {
                     message = message.Split(':')[1];
@@ -181,12 +192,7 @@ public class SERVER : MonoBehaviour
                             int.Parse(data[0]) == 1);
                 }
 
-                if (message == "DisconnectClient")
-                {
-                    client.Close();
-                    connectedClients.Remove(client);
-                    //connectionsText.text = $"Connected controllers: {connectedClients.Count}";
-                }
+
 
                 // Process the message (e.g., game input) here
                 // You can broadcast this message to other clients if needed
