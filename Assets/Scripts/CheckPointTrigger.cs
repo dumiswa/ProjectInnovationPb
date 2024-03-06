@@ -4,6 +4,7 @@ public class CheckPointTrigger : MonoBehaviour
 {
     public int checkpointIndex; // Assign this in the inspector
     public float rotationSpeed = 30f;
+    public bool isRotating = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +16,7 @@ public class CheckPointTrigger : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
+        if(isRotating) 
+            transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
     }
 }

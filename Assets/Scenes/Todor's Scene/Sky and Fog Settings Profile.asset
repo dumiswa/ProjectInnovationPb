@@ -210,10 +210,10 @@ MonoBehaviour:
     m_Value: 1
   upperHemisphereLuxValue:
     m_OverrideState: 1
-    m_Value: 0.01901096
+    m_Value: 0.0448148
   upperHemisphereLuxColor:
     m_OverrideState: 1
-    m_Value: {x: 0.22012807, y: 0.19865344, z: 0.5}
+    m_Value: {x: 0.22861448, y: 0.21834053, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 1
     m_Value: 0.5
@@ -228,7 +228,7 @@ MonoBehaviour:
     m_Value: 0
   hdriSky:
     m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: 275783214f280b94d95b9490add53bbf, type: 3}
+    m_Value: {fileID: 8900000, guid: db823b408f17e8345b46e1358061243d, type: 3}
   distortionMode:
     m_OverrideState: 0
     m_Value: 1
