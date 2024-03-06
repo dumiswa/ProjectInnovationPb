@@ -88,6 +88,8 @@ public class AIController : MonoBehaviour
     {
         if (target == null)
             return;
+        /*if (currentWaypointIndex >= waypoints.Count || waypoints[currentWaypointIndex] == null)
+            return;*/
 
         target = waypoints[currentWaypointIndex];
 
