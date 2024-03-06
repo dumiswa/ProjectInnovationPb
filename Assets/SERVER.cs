@@ -70,7 +70,7 @@ public class SERVER : MonoBehaviour
         for (int i = 0; i < connectedClients.Count; i++)
         {
             GameManager.instance.AddNewPlayer(i + 1, shipIndices[i]);
-            CheckPoint.Instance.RegisterPlayers();
+            CheckPoint.Instance.RegisterPlayers("");
         }
     }
 
