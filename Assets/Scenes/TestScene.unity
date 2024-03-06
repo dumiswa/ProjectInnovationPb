@@ -34547,7 +34547,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.092797786, b: 0, a: 1}
+      key0: {r: 1, g: 0.09411766, b: 0, a: 1}
       key1: {r: 1, g: 0.092797786, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -40486,6 +40486,7 @@ MonoBehaviour:
   checkpointIndex: 0
   rotationSpeed: 30
   isRotating: 0
+  isRotating: 1
 --- !u!65 &6880323079718727228
 BoxCollider:
   m_ObjectHideFlags: 0
