@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1374.9791, g: 1032.6096, b: 822.5501, a: 1}
+  m_IndirectSpecularColor: {r: 1344.776, g: 999.73865, b: 778.85004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -966,6 +966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 2
+  rotationSpeed: 10
 --- !u!135 &269927266
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1307,6 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 8
+  rotationSpeed: 10
 --- !u!135 &355878990
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1648,6 +1650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 10
+  rotationSpeed: 10
 --- !u!135 &553809576
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1767,6 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 9
+  rotationSpeed: 10
 --- !u!135 &566590832
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3061,6 +3065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 1
+  rotationSpeed: 10
 --- !u!135 &1353980948
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3180,6 +3185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 3
+  rotationSpeed: 10
 --- !u!135 &1390643906
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3522,6 +3528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 5
+  rotationSpeed: 10
 --- !u!135 &1407537298
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3746,6 +3753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 11
+  rotationSpeed: 10
 --- !u!135 &1654741002
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3948,6 +3956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 4
+  rotationSpeed: 10
 --- !u!135 &1832671911
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4067,6 +4076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 6
+  rotationSpeed: 10
 --- !u!135 &1852989588
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4186,6 +4196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 7
+  rotationSpeed: 10
 --- !u!135 &1865347849
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5950,6 +5961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 0
+  rotationSpeed: 10
 --- !u!4 &4227792184275983984
 Transform:
   m_ObjectHideFlags: 0
