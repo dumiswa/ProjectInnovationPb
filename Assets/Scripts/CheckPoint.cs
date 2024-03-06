@@ -119,26 +119,22 @@ public class CheckPoint : MonoBehaviour
 
     public void CheckpointPassed(int index)
     {
-        /*if (!raceStarted && index == 0)
-        {
-            StartRace();
-            return; 
-        }
-
-        if (!raceStarted) return;
-
-        if (index == currentCheckpointIndex)
-        {
-            Debug.Log($"Checkpoint {index} passed.");
-            currentCheckpointIndex = (currentCheckpointIndex + 1) % checkPointArray.Length;
-
-            if (index == 0)
-            {
-                CompleteLap();
-            }
-        }*/
-
         foreach (PlayerInfo player in players)
+        {
+            if (raceStarted)
+            {
+                player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
+
+                if (player.currentCheckpointIndex == 0)
+                {
+                    player.currentLap++;
+                }
+            }
+        }
+        //CalculatePlayerPosition();
+        AdvanceCheckpoint();
+
+        /*foreach (PlayerInfo player in players)
         {
             if (raceStarted)
             {
@@ -153,7 +149,7 @@ public class CheckPoint : MonoBehaviour
                 }
             }
         }
-        CalculatePlayerPosition();
+        CalculatePlayerPosition();*/
     }
 
     private void CalculatePlayerPosition()
@@ -214,8 +210,8 @@ public class CheckPoint : MonoBehaviour
     {
         if (raceStarted)
         {
-            GUI.Label(new Rect(10, 10, 200, 20), $"Lap: {currentLap}/{totalLaps}");
-            GUI.Label(new Rect(10, 30, 200, 20), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
+            GUI.Label(new Rect(10, 10, 250, 50), $"Lap: {currentLap}/{totalLaps}");
+            GUI.Label(new Rect(10, 30, 250, 50), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
         }
     }
 }
