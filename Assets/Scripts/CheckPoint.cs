@@ -119,7 +119,7 @@ public class CheckPoint : MonoBehaviour
             }
         }
         //CalculatePlayerPosition();
-        //AdvanceCheckpoint();
+        AdvanceCheckpoint();
 
         /*foreach (PlayerInfo player in players)
         {
