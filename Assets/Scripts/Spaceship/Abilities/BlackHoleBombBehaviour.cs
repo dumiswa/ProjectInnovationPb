@@ -6,10 +6,21 @@ public class BlackHoleBombBehaviour : MonoBehaviour
 {
     public float absorbSpeed = 2.0f;
     public float growDuration = 5.0f;
-    public float implodeDelay = 2.0f;
+    public float implodeDelay = 4.0f;
 
     private void Start()
     {
+        StartCoroutine(GrowAndImplode());
+    }
+
+    public void StopFlying()
+    {
+        StopAllCoroutines(); 
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero; 
+        }
         StartCoroutine(GrowAndImplode());
     }
 

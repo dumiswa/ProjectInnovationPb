@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
@@ -24,7 +26,31 @@ public class CheckPoint : MonoBehaviour
     private int currentLap = 0;
     private int currentCheckpointIndex = 0;
 
-    private bool raceStarted = false;
+    public bool raceStarted = false;
+
+    [Header("Countdown")]
+    private bool countdownStarted = false;
+    private float countdownTimer;
+    private float countdownDuration = 3.0f;
+    public TMP_Text countdownText;
+
+    public event Action RaceStartedEvent;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        countdownText.gameObject.SetActive(false);
+
+        StartCountdown();
+    }
 
     public void RegisterPlayers(GameObject playerObject)
     {
@@ -39,17 +65,31 @@ public class CheckPoint : MonoBehaviour
         {
             ResetRace();
         }
+
+        if (countdownStarted)
+            UpdateCountdown();
     }
 
-    void Awake()
+    private void StartCountdown()
     {
-        if (Instance == null)
+        countdownText.gameObject.SetActive(true);
+        countdownStarted = true;
+        countdownTimer = countdownDuration;
+    }
+
+    private void UpdateCountdown()
+    {
+        countdownTimer -= Time.deltaTime;
+        int seconds = Mathf.CeilToInt(countdownTimer);
+
+        if (seconds > 0)
         {
-            Instance = this;
+            countdownText.text = seconds.ToString();
         }
-        else if (Instance != this)
+        else if (seconds == 0)
         {
-            Destroy(gameObject);
+            countdownText.text = "GO!";
+            StartRace();
         }
     }
 
@@ -66,11 +106,11 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("collided");
-            if (!raceStarted && gameObject == start)
+            /*if (!raceStarted && gameObject == start)
             {
                 StartRace();
-            }
-            else if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
+            }*/
+            if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
             {
                 CheckpointPassed(currentCheckpointIndex);
             }
@@ -131,9 +171,14 @@ public class CheckPoint : MonoBehaviour
     private void StartRace()
     {
         raceStarted = true;
+        countdownStarted = false;
+        countdownText.gameObject.SetActive(false);
+
         currentLap = 1;
         currentCheckpointIndex = 1; 
         Debug.Log("Race has started!");
+
+        RaceStartedEvent?.Invoke();
     }
 
     private void AdvanceCheckpoint()
