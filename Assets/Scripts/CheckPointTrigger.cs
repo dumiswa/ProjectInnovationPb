@@ -12,6 +12,10 @@ public class CheckPointTrigger : MonoBehaviour
         {
             CheckPoint.Instance.CheckpointPassed(checkpointIndex, other.GetComponent<Prototype>().playerIndex);
         }
+        else if (other.CompareTag("AI"))
+        {
+            CheckPoint.Instance.CheckpointPassed(checkpointIndex, other.GetComponent<AIController>().AIIndex);
+        }
     }
 
     private void Update()
