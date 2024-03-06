@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    [Serializable]
     private class PlayerInfo
     {
         public string playerName;
@@ -13,7 +15,7 @@ public class CheckPoint : MonoBehaviour
         public int currentCheckpointIndex = 0;
     }
 
-    private List<PlayerInfo> players = new List<PlayerInfo>();
+    [SerializeField] private List<PlayerInfo> players = new List<PlayerInfo>();
 
     public static CheckPoint Instance { get; private set; }
 
@@ -34,6 +36,7 @@ public class CheckPoint : MonoBehaviour
     private float countdownTimer;
     private float countdownDuration = 3.0f;
     public TMP_Text countdownText;
+    public TMP_Text leaderBoard;
 
     public event Action RaceStartedEvent;
 
@@ -109,6 +112,7 @@ public class CheckPoint : MonoBehaviour
         {
             if (raceStarted && player.playerIndex == playerIndex && player.currentCheckpointIndex == index)
             {
+                player.currentCheckpointIndex++;
                 player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
 
                 if (player.currentCheckpointIndex == 0)
@@ -118,8 +122,8 @@ public class CheckPoint : MonoBehaviour
                 }
             }
         }
-        //CalculatePlayerPosition();
-        AdvanceCheckpoint();
+        CalculatePlayerPosition();
+        //AdvanceCheckpoint();
 
         /*foreach (PlayerInfo player in players)
         {
@@ -148,6 +152,13 @@ public class CheckPoint : MonoBehaviour
             else
                 return p2.currentCheckpointIndex.CompareTo(p1.currentCheckpointIndex);
         });
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= players.Count; i++)
+        {
+            sb.Append($"{i}. {players[i - 1].playerName}" + "\n");
+        }
+
+        leaderBoard.text = sb.ToString();
     }
 
     private void StartRace()

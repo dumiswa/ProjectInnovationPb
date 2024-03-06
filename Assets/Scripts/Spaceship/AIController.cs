@@ -6,6 +6,8 @@ using System;
 
 public class AIController : MonoBehaviour
 {
+    public int AIIndex;
+    
     [Header("Waypoint Navigation")]
     public List<Transform> waypoints;
     public float movementSpeed = 100f;
@@ -40,6 +42,8 @@ public class AIController : MonoBehaviour
         {
             Debug.Log("No checkpoint obj found");
         }
+        
+        CheckPoint.Instance.RegisterPlayers($"AI {AIIndex}", AIIndex);
     }
 
     private void OnRaceStarted()

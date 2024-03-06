@@ -65,7 +65,7 @@ public class Prototype : MonoBehaviour
     // Handle spaceship movements and actions
     void HandleMovement()
     {
-        if (useController ? server.connected : Input.GetKey(KeyCode.W))
+        if (useController ? CheckPoint.Instance.raceStarted : Input.GetKey(KeyCode.W))
         {
             spaceshipRigidbody.AddForce(transform.forward * speed);
             //StartFlameEffects();
