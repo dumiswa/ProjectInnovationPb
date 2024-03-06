@@ -69,8 +69,8 @@ public class SERVER : MonoBehaviour
     {
         for (int i = 0; i < connectedClients.Count; i++)
         {
-            //TODO: fix the nullref here
             GameManager.instance.AddNewPlayer(i + 1, shipIndices[i]);
+            CheckPoint.Instance.RegisterPlayers();
         }
     }
 

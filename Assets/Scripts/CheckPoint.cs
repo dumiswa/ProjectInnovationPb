@@ -7,7 +7,6 @@ public class CheckPoint : MonoBehaviour
 {
     private class PlayerInfo
     {
-        public GameObject playerObject;
         public string name;
         public int currentLap = 0;
         public int currentCheckpointIndex = 0;
@@ -53,11 +52,10 @@ public class CheckPoint : MonoBehaviour
         StartCountdown();
     }
 
-    public void RegisterPlayers(GameObject playerObject, string name)
+    public void RegisterPlayers(string name)
     {
         PlayerInfo newPlayer = new PlayerInfo();
         newPlayer.name = name;
-        newPlayer.playerObject = playerObject;
         players.Add(newPlayer);
     }
 
