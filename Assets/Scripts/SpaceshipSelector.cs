@@ -8,6 +8,8 @@ public class SpaceshipSelector : MonoBehaviour
     public GameObject[] ships;
     public int selectedShip;
 
+    public bool ready;
+
     public void NextShip()
     {
         ships[selectedShip].SetActive(false);
@@ -29,6 +31,6 @@ public class SpaceshipSelector : MonoBehaviour
     public void StartGame()
     {
         PlayerPrefs.SetInt("selectedShip", selectedShip);
-        SceneManager.LoadScene("OutdoorsScene");
+
     }
 }

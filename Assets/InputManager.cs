@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    
     public List<InputData> inputData = new List<InputData>(4);
     
     public static InputManager instance;
@@ -48,6 +50,7 @@ public class InputManager : MonoBehaviour
         return inputData[shipIndex - 1];
     }
 
+    [Serializable]
     public class InputData
     {
         public float Elevation;
