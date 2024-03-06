@@ -7,7 +7,8 @@ public class CheckPoint : MonoBehaviour
 {
     private class PlayerInfo
     {
-        public string name;
+        public string playerName;
+        public int playerIndex;
         public int currentLap = 0;
         public int currentCheckpointIndex = 0;
     }
@@ -52,10 +53,11 @@ public class CheckPoint : MonoBehaviour
         StartCountdown();
     }
 
-    public void RegisterPlayers(string name)
+    public void RegisterPlayers(string shipName, int playerIndex)
     {
         PlayerInfo newPlayer = new PlayerInfo();
-        newPlayer.name = name;
+        newPlayer.playerIndex = playerIndex;
+        newPlayer.playerName = shipName;
         players.Add(newPlayer);
     }
 
@@ -101,38 +103,23 @@ public class CheckPoint : MonoBehaviour
         Debug.Log("Race reset. Press R to start.");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("collided");
-            /*if (!raceStarted && gameObject == start)
-            {
-                StartRace();
-            }*/
-            if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
-            {
-                CheckpointPassed(currentCheckpointIndex);
-            }
-        }
-    }
-
-    public void CheckpointPassed(int index)
+    public void CheckpointPassed(int index, int playerIndex)
     {
         foreach (PlayerInfo player in players)
         {
-            if (raceStarted)
+            if (raceStarted && player.playerIndex == playerIndex && player.currentCheckpointIndex == index)
             {
                 player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
 
                 if (player.currentCheckpointIndex == 0)
                 {
                     player.currentLap++;
+                    player.currentCheckpointIndex = 0;
                 }
             }
         }
         //CalculatePlayerPosition();
-        AdvanceCheckpoint();
+        //AdvanceCheckpoint();
 
         /*foreach (PlayerInfo player in players)
         {

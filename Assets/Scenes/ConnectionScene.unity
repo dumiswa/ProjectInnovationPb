@@ -261,6 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 2
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &309134144
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -380,6 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 1
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &364985173
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -499,6 +503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 5
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &392300835
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -618,6 +624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 4
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &423925487
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -768,6 +776,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 0
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &589560395
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -887,6 +897,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 3
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &600120414
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1006,6 +1018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 9
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &680473850
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1125,6 +1139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 8
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &709135751
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1388,6 +1404,8 @@ MonoBehaviour:
   - {fileID: 1299118779}
   - {fileID: 709135749}
   totalLaps: 2
+  raceStarted: 0
+  countdownText: {fileID: 1026522313198980172}
 --- !u!4 &1021218625
 Transform:
   m_ObjectHideFlags: 0
@@ -1654,6 +1672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 7
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &1299118781
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2020,6 +2040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointIndex: 6
+  rotationSpeed: 30
+  isRotating: 1
 --- !u!135 &1594741386
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2367,6 +2389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb88e161f70d4b64689c883ddee129b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputData: []
 --- !u!1 &2080740024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2742,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b0f648710f2eb94dbb9837e843ba0e0, type: 3}
+--- !u!114 &1026522313198980172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1026522311512112892, guid: 8b0f648710f2eb94dbb9837e843ba0e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1026522313198980171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

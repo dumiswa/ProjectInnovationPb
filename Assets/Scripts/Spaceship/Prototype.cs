@@ -8,7 +8,7 @@ public class Prototype : MonoBehaviour
 {
     public bool useController = false;
 
-    private int playerIndex;
+    public int playerIndex;
 
     public float speed = 100.0f;
     public float maxSpeed = 500.0f;

@@ -10,7 +10,7 @@ public class CheckPointTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CheckPoint.Instance.CheckpointPassed(checkpointIndex);
+            CheckPoint.Instance.CheckpointPassed(checkpointIndex, other.GetComponent<Prototype>().playerIndex);
         }
     }
 

@@ -21,6 +21,8 @@ public class SERVER : MonoBehaviour
     public List<int> shipIndices = new List<int>();
     private const int maxClients = 4; // Maximum allowed clients
 
+    private List<string> names = new List<string>(4) {"","","",""};
+
     public bool connected = false;
 
     //[SerializeField] private TextMeshProUGUI connectionsText;
@@ -70,7 +72,7 @@ public class SERVER : MonoBehaviour
         for (int i = 0; i < connectedClients.Count; i++)
         {
             GameManager.instance.AddNewPlayer(i + 1, shipIndices[i]);
-            CheckPoint.Instance.RegisterPlayers(SelectorManager.instance.selectors[i].name);
+            CheckPoint.Instance.RegisterPlayers(names[i], i + 1);
         }
     }
 
@@ -175,6 +177,7 @@ public class SERVER : MonoBehaviour
                 {
                     var shipName = message.Split(':')[1];
                     SelectorManager.instance.selectors[controllerIndex - 1].SetName(shipName);
+                    names[controllerIndex - 1] = shipName;
                 }
                 if (message.Contains("SelectShip:"))
                 {
