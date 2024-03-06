@@ -67,7 +67,7 @@ public class SelectorManager : MonoBehaviour
         {
             SERVER.instance.shipIndices.Add(selectors[i].selectedShip);
         }
-        AsyncOperation operation = SceneManager.LoadSceneAsync("ConnectionScene");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("TestScene");
 
         while (!operation.isDone)
         {
