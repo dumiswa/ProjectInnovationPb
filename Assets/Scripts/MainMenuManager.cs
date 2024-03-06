@@ -73,6 +73,11 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("ShipSelector");
     }
+    
+    public void MultiPlayerOnClick()
+    {
+        SceneManager.LoadScene("ShipSelector");
+    }
 
     /*public void ChangeMenu(MenuState newState)
     {

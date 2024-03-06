@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject playerPrefab;
+    public List<GameObject> playerPrefab;
 
     public List<Transform> spawnPoints;
 
@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void AddNewPlayer(int playerIndex)
+    public void AddNewPlayer(int playerIndex, int shipIndex)
     {
-        GameObject player = Instantiate(playerPrefab, spawnPoints[playerIndex - 1].position, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab[shipIndex], spawnPoints[playerIndex - 1].position, Quaternion.identity);
         players.Add(player);
         player.GetComponent<Prototype>().Init(playerIndex);
         SetViewRect();
