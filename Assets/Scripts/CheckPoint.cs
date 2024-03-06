@@ -162,7 +162,6 @@ public class CheckPoint : MonoBehaviour
         {
             if (p1.currentLap != p2.currentLap)
                 return p2.currentLap.CompareTo(p1.currentLap);
-
             else
                 return p2.currentCheckpointIndex.CompareTo(p1.currentCheckpointIndex);
         });
