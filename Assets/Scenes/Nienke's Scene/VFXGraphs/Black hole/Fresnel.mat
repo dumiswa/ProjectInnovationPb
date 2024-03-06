@@ -88,7 +88,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Fresnel_color: {r: 10.713415, g: 2.6344464, b: 11.181761, a: 1}
+    - _Fresnel_color: {r: 44.391243, g: 4.18802, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2618344494721335120
 MonoBehaviour:

@@ -182,6 +182,20 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "773483fcd9c84f0eabeacaafe4d21e8a"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "53678150d4a54fbd98894bb3296f150d"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "e172f4317c914ce2ba33a868c02f401c"
                 },
                 "m_SlotId": 0
@@ -1116,7 +1130,7 @@
     "m_TessellationBackFaceCullEpsilon": -0.25,
     "m_TessellationMaxDisplacement": 0.009999999776482582,
     "m_Version": 1,
-    "inspectorFoldoutMask": 1
+    "inspectorFoldoutMask": 11
 }
 
 {
@@ -1832,7 +1846,7 @@
     "m_TransparencyFog": false,
     "m_AlphaTestShadow": false,
     "m_BackThenFrontRendering": false,
-    "m_TransparentDepthPrepass": false,
+    "m_TransparentDepthPrepass": true,
     "m_TransparentDepthPostpass": false,
     "m_SupportLodCrossFade": false
 }
