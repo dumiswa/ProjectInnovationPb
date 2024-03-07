@@ -1,16 +1,21 @@
+using System;
 using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    [Serializable]
     private class PlayerInfo
     {
-        public GameObject playerObject;
+        public string playerName;
+        public int playerIndex;
         public int currentLap = 0;
         public int currentCheckpointIndex = 0;
     }
 
-    private List<PlayerInfo> players = new List<PlayerInfo>();
+    [SerializeField] private List<PlayerInfo> players = new List<PlayerInfo>();
 
     public static CheckPoint Instance { get; private set; }
 
@@ -24,22 +29,16 @@ public class CheckPoint : MonoBehaviour
     private int currentLap = 0;
     private int currentCheckpointIndex = 0;
 
-    private bool raceStarted = false;
+    public bool raceStarted = false;
 
-    public void RegisterPlayers(GameObject playerObject)
-    {
-        PlayerInfo newPlayer = new PlayerInfo();
-        newPlayer.playerObject = playerObject;
-        players.Add(newPlayer);
-    }
+    [Header("Countdown")]
+    private bool countdownStarted = false;
+    private float countdownTimer;
+    private float countdownDuration = 3.0f;
+    public TMP_Text countdownText;
+    public TMP_Text leaderBoard;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetRace();
-        }
-    }
+    public event Action RaceStartedEvent;
 
     void Awake()
     {
@@ -51,6 +50,52 @@ public class CheckPoint : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        countdownText.gameObject.SetActive(false);
+
+        StartCountdown();
+    }
+
+    public void RegisterPlayers(string shipName, int playerIndex)
+    {
+        PlayerInfo newPlayer = new PlayerInfo();
+        newPlayer.playerIndex = playerIndex;
+        newPlayer.playerName = shipName;
+        players.Add(newPlayer);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetRace();
+        }
+
+        if (countdownStarted)
+            UpdateCountdown();
+    }
+
+    private void StartCountdown()
+    {
+        countdownText.gameObject.SetActive(true);
+        countdownStarted = true;
+        countdownTimer = countdownDuration;
+    }
+
+    private void UpdateCountdown()
+    {
+        countdownTimer -= Time.deltaTime;
+        int seconds = Mathf.CeilToInt(countdownTimer);
+
+        if (seconds > 0)
+        {
+            countdownText.text = seconds.ToString();
+        }
+        else if (seconds == 0)
+        {
+            countdownText.text = "GO!";
+            StartRace();
+        }
     }
 
     private void ResetRace()
@@ -61,44 +106,26 @@ public class CheckPoint : MonoBehaviour
         Debug.Log("Race reset. Press R to start.");
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void CheckpointPassed(int index, int playerIndex)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("collided");
-            if (!raceStarted && gameObject == start)
-            {
-                StartRace();
-            }
-            else if (raceStarted && gameObject == checkPointArray[currentCheckpointIndex])
-            {
-                CheckpointPassed(currentCheckpointIndex);
-            }
-        }
-    }
-
-    public void CheckpointPassed(int index)
-    {
-        /*if (!raceStarted && index == 0)
-        {
-            StartRace();
-            return; 
-        }
-
-        if (!raceStarted) return;
-
-        if (index == currentCheckpointIndex)
-        {
-            Debug.Log($"Checkpoint {index} passed.");
-            currentCheckpointIndex = (currentCheckpointIndex + 1) % checkPointArray.Length;
-
-            if (index == 0)
-            {
-                CompleteLap();
-            }
-        }*/
-
         foreach (PlayerInfo player in players)
+        {
+            if (raceStarted && player.playerIndex == playerIndex && player.currentCheckpointIndex == index)
+            {
+                player.currentCheckpointIndex++;
+                //player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
+
+                if (player.currentCheckpointIndex == checkPointArray.Length - 1)
+                {
+                    player.currentLap++;
+                    player.currentCheckpointIndex = 0; 
+                }
+            }
+        }
+        CalculatePlayerPosition();
+        //AdvanceCheckpoint();
+
+        /*foreach (PlayerInfo player in players)
         {
             if (raceStarted)
             {
@@ -113,7 +140,7 @@ public class CheckPoint : MonoBehaviour
                 }
             }
         }
-        CalculatePlayerPosition();
+        CalculatePlayerPosition();*/
     }
 
     private void CalculatePlayerPosition()
@@ -122,18 +149,29 @@ public class CheckPoint : MonoBehaviour
         {
             if (p1.currentLap != p2.currentLap)
                 return p2.currentLap.CompareTo(p1.currentLap);
-
             else
                 return p2.currentCheckpointIndex.CompareTo(p1.currentCheckpointIndex);
         });
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= players.Count; i++)
+        {
+            sb.Append($"{i}. {players[i - 1].playerName}" + " checkPoint: " + players[i-1].currentCheckpointIndex + "\n");
+        }
+
+        leaderBoard.text = sb.ToString();
     }
 
     private void StartRace()
     {
         raceStarted = true;
+        countdownStarted = false;
+        countdownText.gameObject.SetActive(false);
+
         currentLap = 1;
         currentCheckpointIndex = 1; 
         Debug.Log("Race has started!");
+
+        RaceStartedEvent?.Invoke();
     }
 
     private void AdvanceCheckpoint()
@@ -170,8 +208,15 @@ public class CheckPoint : MonoBehaviour
     {
         if (raceStarted)
         {
-            GUI.Label(new Rect(10, 10, 200, 20), $"Lap: {currentLap}/{totalLaps}");
-            GUI.Label(new Rect(10, 30, 200, 20), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
+            //GUI.Label(new Rect(10, 10, 250, 50), $"Lap: {currentLap}/{totalLaps}");
+            //GUI.Label(new Rect(10, 30, 250, 50), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
+
+            float yOffset = 50; 
+            foreach (PlayerInfo player in players)
+            {
+                GUI.Label(new Rect(10, yOffset, 250, 50), $"Player: {player.playerName} - Lap: {player.currentLap} / Checkpoint: {player.currentCheckpointIndex}");
+                yOffset += 20; 
+            }
         }
     }
 }
