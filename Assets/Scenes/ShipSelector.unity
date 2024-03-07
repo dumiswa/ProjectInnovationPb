@@ -412,7 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0618e3c6cea864e8d153d61d6ef1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectorPrefab: {fileID: 3355952942919697699, guid: 270a6514a58623447ac8c46d3e71b3a4,
+  selectors: []
+  selectorPrefab: {fileID: 3004819567657191039, guid: 7968a2ea3c0afeb4f95f2c74005dfa07,
     type: 3}
   PlayButton: {fileID: 558934189}
 --- !u!1 &558934187

@@ -93,13 +93,13 @@ public class SelectorManager : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(0.5f, 1));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(0.5f, 1));
                         break;
                     case 1:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0.5f, 0), new Vector2(0.5f, 1));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0.5f, 0), new Vector2(0.5f, 1));
                         break;
                 }
-                
+                selectors[i].ChangePlayer(false);
             }
         }
 
@@ -110,19 +110,19 @@ public class SelectorManager : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0, 0.5f), new Vector2(0.5f, 0.5f));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0, 0.5f), new Vector2(0.5f, 0.5f));
                         break;
                     case 1:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
                         break;
                     case 2:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(0.5f, 0.5f));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(0.5f, 0.5f));
                         break;
                     case 3:
-                        selectors[i].GetComponentInParent<Camera>().rect = new Rect(new Vector2(0.5f, 0), new Vector2(0.5f, 0.5f));
+                        selectors[i].GetComponent<Camera>().rect = new Rect(new Vector2(0.5f, 0), new Vector2(0.5f, 0.5f));
                         break;
                 }
-                
+                selectors[i].ChangePlayer(true);
             }
         }
     }
