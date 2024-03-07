@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAbilityController : MonoBehaviour
 {
     private IAbility currentAbility;
+    private Prototype playerController;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,7 +23,7 @@ public class PlayerAbilityController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && currentAbility != null)
+        if (currentAbility != null && playerController.useController ?  InputManager.instance.GetInput(playerController.playerIndex).UsePowerUp : Input.GetMouseButtonDown(0))
         {
             currentAbility.Use(gameObject);
             currentAbility = null;

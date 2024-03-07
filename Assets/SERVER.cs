@@ -25,7 +25,7 @@ public class SERVER : MonoBehaviour
 
     public bool connected = false;
 
-    //[SerializeField] private TextMeshProUGUI connectionsText;
+    [SerializeField] private TextMeshProUGUI portText;
 
     public static SERVER instance;
 
@@ -51,6 +51,7 @@ public class SERVER : MonoBehaviour
                 listener.Start();
                 Debug.Log($"Port {i} is available.");
                 listener.Stop();
+                portText.text = $"Port: {i}";
                 port = i;
                 break;
             }
@@ -192,7 +193,7 @@ public class SERVER : MonoBehaviour
                     string[] data = message.Split(',');
                     if(InputManager.instance != null)
                         InputManager.instance.SetInput(controllerIndex, float.Parse(data[1]), float.Parse(data[2]),
-                            int.Parse(data[0]) == 1);
+                            int.Parse(data[0]) == 1, int.Parse(data[3]) == 1);
                 }
 
 

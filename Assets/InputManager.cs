@@ -38,11 +38,12 @@ public class InputManager : MonoBehaviour
         inputData[playerIndex - 1] = new InputData();
     }
 
-    public void SetInput(int shipIndex, float elevation, float rotation, bool brake)
+    public void SetInput(int shipIndex, float elevation, float rotation, bool brake, bool usePowerUp)
     {
         inputData[shipIndex - 1].Elevation = elevation;
         inputData[shipIndex - 1].Rotation = rotation;
         inputData[shipIndex - 1].Brake = brake;
+        inputData[shipIndex - 1].UsePowerUp = usePowerUp;
     }
 
     public InputData GetInput(int shipIndex)
@@ -56,5 +57,6 @@ public class InputManager : MonoBehaviour
         public float Elevation;
         public float Rotation;
         public bool Brake;
+        public bool UsePowerUp;
     }
 }
