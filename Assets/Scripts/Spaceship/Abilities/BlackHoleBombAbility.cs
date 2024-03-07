@@ -14,7 +14,7 @@ public class BlackHoleBombAbility : MonoBehaviour, IAbility
 
     public void Use(GameObject user)
     {
-        GameObject blackHole = Instantiate(blackHolePrefab, user.transform.position + user.transform.forward * 20, Quaternion.identity);
+        GameObject blackHole = Instantiate(blackHolePrefab, user.transform.position + user.transform.forward * 10, Quaternion.identity);
         Rigidbody rb = blackHole.GetComponent<Rigidbody>();
         if (rb != null)
         {
