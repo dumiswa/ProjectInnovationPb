@@ -193,7 +193,7 @@ public class SERVER : MonoBehaviour
                     string[] data = message.Split(',');
                     if(InputManager.instance != null)
                         InputManager.instance.SetInput(controllerIndex, float.Parse(data[1]), float.Parse(data[2]),
-                            int.Parse(data[0]) == 1);
+                            int.Parse(data[0]) == 1, int.Parse(data[3]) == 1);
                 }
 
 
