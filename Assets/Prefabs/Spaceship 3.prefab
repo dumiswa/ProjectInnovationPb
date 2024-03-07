@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ffaaf0c659704ba4dd92a949eb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useController: 0
+  useController: 1
   playerIndex: 0
   speed: 500
   maxSpeed: 1000
