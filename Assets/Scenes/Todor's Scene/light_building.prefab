@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579230508850039114}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.881192, z: 0, w: 0.47275838}
   m_LocalPosition: {x: -15.42, y: 31334.08, z: -16.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -123.573, z: 0}
 --- !u!108 &6765223569208052986
 Light:
@@ -45,7 +45,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.990566, g: 0.87928116, b: 0.5108579, a: 1}
-  m_Intensity: 131.52956
+  m_Intensity: 1.1650046
   m_Range: 6.0717907
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -88,7 +88,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 3825
+  m_ColorTemperature: 4597
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 6.0717907}
   m_UseBoundingSphereOverride: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 822.0597
+  m_Intensity: 7.2812786
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 0.4
   m_InnerSpotPercent: 0
