@@ -39,7 +39,9 @@ public class Prototype : MonoBehaviour
     {
         spaceshipRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-        wantedYRotation = transform.localRotation.y;
+        wantedYRotation = transform.localRotation.eulerAngles.y;
+        xRotation = transform.localRotation.eulerAngles.x;
+        yRotation = transform.localRotation.eulerAngles.y;
         server = SERVER.instance;
     }
 
@@ -65,7 +67,9 @@ public class Prototype : MonoBehaviour
     // Handle spaceship movements and actions
     void HandleMovement()
     {
-        if (useController ? CheckPoint.Instance.raceStarted : Input.GetKey(KeyCode.W))
+        if (!CheckPoint.Instance.raceStarted)
+            return;
+        if (useController ? true : Input.GetKey(KeyCode.W))
         {
             spaceshipRigidbody.AddForce(transform.forward * speed);
             //StartFlameEffects();
@@ -111,8 +115,10 @@ public class Prototype : MonoBehaviour
 
     void HandleRotation()
     {
+        if (!CheckPoint.Instance.raceStarted)
+            return;
         float mouseX = useController ? InputManager.instance.GetInput(playerIndex).Rotation : Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = useController ? InputManager.instance.GetInput(playerIndex).Elevation * 45 :  Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseY = useController ? InputManager.instance.GetInput(playerIndex).Elevation * 90 :  Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // smooth between current rotation and wanted rotation
 
