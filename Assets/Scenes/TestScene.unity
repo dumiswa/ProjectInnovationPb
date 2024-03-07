@@ -18830,7 +18830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc951bf9ad6a6c43bf133314f3a060f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  players:
+  - playerName: sugipula
+    playerIndex: 0
+    currentLap: 0
+    currentCheckpointIndex: 0
   start: {fileID: 440336834}
   end: {fileID: 440336834}
   checkPointArray:

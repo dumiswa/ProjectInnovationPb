@@ -60,6 +60,11 @@ public class AIController : MonoBehaviour
        }
     }
 
+    void FlyTowardsPickups()
+    {
+
+    }
+
     void WaypointNavigation()
     {
         if (currentWaypointIndex < waypoints.Count)

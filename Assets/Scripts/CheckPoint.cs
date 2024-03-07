@@ -113,12 +113,12 @@ public class CheckPoint : MonoBehaviour
             if (raceStarted && player.playerIndex == playerIndex && player.currentCheckpointIndex == index)
             {
                 player.currentCheckpointIndex++;
-                player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
+                //player.currentCheckpointIndex = (player.currentCheckpointIndex + 1) % checkPointArray.Length;
 
-                if (player.currentCheckpointIndex == 0)
+                if (player.currentCheckpointIndex == checkPointArray.Length - 1)
                 {
                     player.currentLap++;
-                    player.currentCheckpointIndex = 0;
+                    player.currentCheckpointIndex = 0; 
                 }
             }
         }
@@ -155,7 +155,7 @@ public class CheckPoint : MonoBehaviour
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= players.Count; i++)
         {
-            sb.Append($"{i}. {players[i - 1].playerName}" + "\n");
+            sb.Append($"{i}. {players[i - 1].playerName}" + " checkPoint: " + players[i-1].currentCheckpointIndex + "\n");
         }
 
         leaderBoard.text = sb.ToString();
@@ -208,8 +208,15 @@ public class CheckPoint : MonoBehaviour
     {
         if (raceStarted)
         {
-            GUI.Label(new Rect(10, 10, 250, 50), $"Lap: {currentLap}/{totalLaps}");
-            GUI.Label(new Rect(10, 30, 250, 50), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
+            //GUI.Label(new Rect(10, 10, 250, 50), $"Lap: {currentLap}/{totalLaps}");
+            //GUI.Label(new Rect(10, 30, 250, 50), $"Checkpoint: {currentCheckpointIndex}/{checkPointArray.Length}");
+
+            float yOffset = 50; 
+            foreach (PlayerInfo player in players)
+            {
+                GUI.Label(new Rect(10, yOffset, 250, 50), $"Player: {player.playerName} - Lap: {player.currentLap} / Checkpoint: {player.currentCheckpointIndex}");
+                yOffset += 20; 
+            }
         }
     }
 }
