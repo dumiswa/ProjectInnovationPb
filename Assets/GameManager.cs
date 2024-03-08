@@ -41,7 +41,12 @@ public class GameManager : MonoBehaviour
 
     private void SetViewRect()
     {
-        if (players.Count <= 2)
+        if (players.Count == 1)
+        {
+            players[0].GetComponentInChildren<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(1, 1));
+        }
+        
+        if (players.Count == 2)
         {
             for (int i = 0; i < players.Count; i++)
             {
