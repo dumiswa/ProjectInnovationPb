@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void AddNewPlayer(int playerIndex, int shipIndex)
     {
-        GameObject player = Instantiate(playerPrefab[shipIndex], spawnPoints[playerIndex - 1].position, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab[shipIndex], spawnPoints[playerIndex - 1].position, spawnPoints[playerIndex - 1].rotation);
         players.Add(player);
         player.GetComponent<Prototype>().Init(playerIndex);
         SetViewRect();
