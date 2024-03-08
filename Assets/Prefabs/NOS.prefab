@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5883885420365463062}
   - component: {fileID: 4493065463082494680}
   - component: {fileID: 5820661296211307420}
+  - component: {fileID: 5002887115460514604}
+  - component: {fileID: 7293538233756230277}
   m_Layer: 0
   m_Name: NOS
   m_TagString: Untagged
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2222379528615022166}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.1, y: 11.7192545, z: -105.43127}
   m_LocalScale: {x: 18.050766, y: 18.050766, z: 18.050766}
   m_ConstrainProportionsScale: 0
@@ -83,3 +85,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5002887115460514604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222379528615022166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798bd2f269c2cbc4188b034d7532183e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostAmount: 500
+  boostDuration: 3
+--- !u!64 &7293538233756230277
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222379528615022166}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4711208715938537054, guid: dc7be72ce8601fb4fa58051693c7e7ce, type: 3}
