@@ -28513,7 +28513,7 @@ MonoBehaviour:
   - {fileID: 543450652493474116}
   - {fileID: 0}
   - {fileID: 543450653321427829}
-  movementSpeed: 200
+  movementSpeed: 350
   target: {fileID: 440336835}
   maxSteeringSpeed: 50
   rotationSpeed: 1.5
@@ -44340,7 +44340,7 @@ MonoBehaviour:
   - {fileID: 543450652493474116}
   - {fileID: 0}
   - {fileID: 543450653321427829}
-  movementSpeed: 200
+  movementSpeed: 450
   target: {fileID: 440336835}
   maxSteeringSpeed: 50
   rotationSpeed: 1.5
