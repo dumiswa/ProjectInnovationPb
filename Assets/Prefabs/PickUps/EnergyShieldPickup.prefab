@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1332559848055989062}
   - component: {fileID: 7418230206519329505}
   - component: {fileID: 2455948367120189008}
-  - component: {fileID: 3482885139209051144}
+  - component: {fileID: 2981039720625972571}
   m_Layer: 0
   m_Name: EnergyShieldPickup
   m_TagString: AbilityPickup
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3482885139209051144
+--- !u!114 &2981039720625972571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8404687935407961037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb67b324488c70841871debea18a4936, type: 3}
+  m_Script: {fileID: 11500000, guid: 3400e4be9da04a64a89acc978b9a154f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyShieldPrefab: {fileID: 3667431970237301316, guid: 9b7914a9cea32814f8cfeb0352792b26,
+  AbilityInstance: {fileID: 3667431970237301316, guid: 9b7914a9cea32814f8cfeb0352792b26,
     type: 3}

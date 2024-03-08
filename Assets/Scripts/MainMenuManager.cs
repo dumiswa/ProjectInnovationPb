@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour
 
     private MenuState currentState;     
 
-    public void start()
+    public void Start()
     {
         //ChangeMenu(MenuState.Home);
         menuChangeEvent = new UnityEvent<MenuState>();

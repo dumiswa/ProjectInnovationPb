@@ -5,12 +5,35 @@ using UnityEngine.VFX.Utility;
 
 public class EnergyShieldAbility : MonoBehaviour, IAbility
 {
-    public GameObject energyShieldPrefab;
-
     public void Use(GameObject User)
     {
-        GameObject shield = Instantiate(energyShieldPrefab, User.transform.position, Quaternion.identity);
-        shield.transform.SetParent(User.transform);
-        shield.transform.localScale = new Vector3((float)9, (float)9, (float)9);
+        transform.SetParent(User.transform);
+        transform.localScale = new Vector3((float)9, (float)9, (float)9);
+        if (playerController != null)
+        {
+            playerController.SetProtection(true);
+        }
+
+        StartCoroutine(DestroyShield());
+    }
+    
+    public float duration = 5.0f;
+    PlayerAbilityController playerController;
+
+    private void Start()
+    {
+        playerController = GetComponentInParent<PlayerAbilityController>();
+    }
+
+    private IEnumerator DestroyShield()
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (playerController != null)
+        {
+            playerController.SetProtection(false);
+        }
+
+        Destroy(gameObject);
     }
 }
