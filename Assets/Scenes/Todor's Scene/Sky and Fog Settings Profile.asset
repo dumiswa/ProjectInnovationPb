@@ -363,16 +363,16 @@ MonoBehaviour:
     m_Value: 2
   threshold:
     m_OverrideState: 1
-    m_Value: 4.63
+    m_Value: 0.73
   intensity:
     m_OverrideState: 1
-    m_Value: 0.642
+    m_Value: 0.67
   scatter:
     m_OverrideState: 1
-    m_Value: 0.89
+    m_Value: 0.287
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.9308176, g: 0.7698271, b: 0.86821014, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
