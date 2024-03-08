@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using System.Linq;
 
 public class AIController : MonoBehaviour
 {
@@ -43,7 +44,13 @@ public class AIController : MonoBehaviour
             Debug.Log("No checkpoint obj found");
         }
         
+        
+    }
+
+    public void INIT()
+    {
         CheckPoint.Instance.RegisterPlayers($"AI {AIIndex}", AIIndex);
+        waypoints = CheckPoint.Instance.GetComponentsInChildren<Transform>().ToList();
     }
 
     private void OnRaceStarted()

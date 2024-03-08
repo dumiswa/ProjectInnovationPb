@@ -86,7 +86,12 @@ public class SelectorManager : MonoBehaviour
     
     private void SetViewRect()
     {
-        if (selectors.Count <= 2)
+        if (selectors.Count == 1)
+        {
+            selectors[0].GetComponentInChildren<Camera>().rect = new Rect(new Vector2(0, 0), new Vector2(1, 1));
+        }
+        
+        if (selectors.Count == 2)
         {
             for (int i = 0; i < selectors.Count; i++)
             {

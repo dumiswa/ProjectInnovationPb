@@ -75,6 +75,7 @@ public class SERVER : MonoBehaviour
             GameManager.instance.AddNewPlayer(i + 1, shipIndices[i]);
             CheckPoint.Instance.RegisterPlayers(names[i], i + 1);
         }
+        GameManager.instance.SpawnAI();
     }
 
     public void StopAcceptingClients()

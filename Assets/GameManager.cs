@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerPrefab;
 
+    public GameObject AIEnemyPrefab;
+
     public List<Transform> spawnPoints;
 
     private List<GameObject> players = new List<GameObject>();
@@ -28,6 +30,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SpawnAI()
+    {
+        int amountOfAI = 4 - players.Count;
+        for (int i = players.Count + 1; i < amountOfAI + players.Count + 1; i++)
+        {
+            GameObject AI = Instantiate(AIEnemyPrefab, spawnPoints[i - 1].position, spawnPoints[i - 1].rotation);
+            AI.GetComponent<AIController>().AIIndex = i;
+            AI.GetComponent<AIController>().INIT();
+            
+        }
     }
 
     public void AddNewPlayer(int playerIndex, int shipIndex)
